@@ -1,6 +1,10 @@
 .App {
   text-align: center;
 }
+.main-bg{
+  height:300px;
+  background:url('./img/bg.png') no-repeat center / cover;
+}
 
 .App-logo {
   height: 40vmin;
