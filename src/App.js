@@ -40,7 +40,7 @@ function App() {
             </>
           }
         />
-        <Route path='/detail' element={<Detail />} />
+        <Route path='/detail/:id' element={<Detail shoes={shoes} />} />
         <Route path='*' element={<>없는페이지임</>} />
 
         <Route path="/event" element={<Event />}>
