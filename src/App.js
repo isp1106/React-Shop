@@ -3,17 +3,20 @@ import { Button, Navbar, Container, Nav } from "react-bootstrap";
 import "./App.css";
 import bg from "./img/bg.png";
 import shoeData from "./data";
-import { useState } from "react";
+import { createContext, useState } from "react";
 import Card from "./components/Card";
 import Event from "./routes/Event";
 import Detail from "./routes/Detail";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import axios from 'axios';
 
+export const Context1 = createContext()
+
 function App() {
   const [shoes, setShoes] = useState(shoeData);
   const [more, setMore] = useState('')
   const navigate = useNavigate();
+  const [stuff] = useState([10, 11, 12])
   return (
     <div className='App'>
       <Navbar bg='light' variant='light'>
@@ -52,7 +55,11 @@ function App() {
             </>
           }
         />
-        <Route path='/detail/:id' element={<Detail shoes={shoes} />} />
+        <Route path='/detail/:id' element={
+          <Context1.Provider value={{ stuff, shoes }}>
+            <Detail shoes={shoes} />
+          </Context1.Provider>
+        } />
         <Route path='*' element={<>없는페이지임</>} />
 
         <Route path="/event" element={<Event />}>

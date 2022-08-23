@@ -5,12 +5,16 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components';
 import {Nav} from 'react-bootstrap'
+import {Context1} from './../App'
+import { useContext } from 'react';
 // const YellowBtn = styled.button`
 //   background: ${props => props.bg};
 //   color: black;
 //   padding: 10px;
 // `
 function Detail(props) {
+  let {stuff, shoes} = useContext(Context1)
+
   const [count, setCount] = useState(0)
   const [alert, setAlert] = useState(true)
   const [tab, setTab] = useState(0)
@@ -41,6 +45,7 @@ function Detail(props) {
           </div>
         : null
         }
+        {stuff}
       <div className="row">
         <div className="col-md-6">
           <img src={`https://codingapple1.github.io/shop/shoes${findProduct.id+1}.jpg`} width="100%" />
@@ -68,7 +73,7 @@ function Detail(props) {
   )
 }
 function TabContent({tab}){
-
+    let {stuff, shoes} = useContext(Context1)
     const [fade, setFade] = useState('');
 
     useEffect(()=>{
@@ -84,7 +89,7 @@ function TabContent({tab}){
     // if문 안쓰려면 
     return (
       <div className={`start ${fade}`}>
-        {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]}
+        {[<div>{stuff}</div>, <div>내용1</div>, <div>내용2</div>][tab]}
       </div>
     )
     // if문 
