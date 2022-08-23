@@ -8,9 +8,11 @@ import Card from "./components/Card";
 import Event from "./routes/Event";
 import Detail from "./routes/Detail";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
+import axios from 'axios';
 
 function App() {
-  const [shoes] = useState(shoeData);
+  const [shoes, setShoes] = useState(shoeData);
+  const [more, setMore] = useState('')
   const navigate = useNavigate();
   return (
     <div className='App'>
@@ -37,6 +39,16 @@ function App() {
                   })}
                 </div>
               </div>
+              <button onClick={()=> {
+                axios.get('https://codingapple1.github.io/shop/data2.json').then((res)=> {
+                  let copy = [...shoes, ...res.data];
+                  console.log(copy);
+                  setShoes(copy);
+                })
+                .catch(()=>{
+                  console.log('error')
+                })
+              }}>더 보기</button>
             </>
           }
         />
@@ -47,8 +59,7 @@ function App() {
           <Route path="" element={<>첫 주문시 양배추즙 서비스</>}></Route>
           <Route path="two" element={<>생일기념 쿠폰받기</>}></Route>
         </Route>
-      </Routes>
-      
+      </Routes>    
     </div>
   );
 }
