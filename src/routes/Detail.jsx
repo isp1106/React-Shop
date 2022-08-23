@@ -14,12 +14,17 @@ function Detail(props) {
   const [count, setCount] = useState(0)
   const [alert, setAlert] = useState(true)
   const [tab, setTab] = useState(0)
-  
+  const [open, setOpen] = useState('')
   useEffect(()=>{
 
-    let timer = setTimeout(() => {setAlert(false)}, 2000);
+    const timerDetail = setTimeout(()=> {
+      setOpen('end')
+    }, 100)
+    const timer = setTimeout(() => {setAlert(false)}, 2000);
     return ()=>{
+      clearTimeout(timerDetail);
       clearTimeout(timer);
+      setOpen('')
     }
   }, [])
   
@@ -28,7 +33,7 @@ function Detail(props) {
       element.id == id
   )
   return (
-    <div className="container">
+    <div className={`container start ${open}`}>
         {
         alert === true 
         ? <div className='alert alert-warning'>
@@ -36,7 +41,6 @@ function Detail(props) {
           </div>
         : null
         }
-      {count}
       <div className="row">
         <div className="col-md-6">
           <img src={`https://codingapple1.github.io/shop/shoes${findProduct.id+1}.jpg`} width="100%" />
@@ -64,17 +68,33 @@ function Detail(props) {
   )
 }
 function TabContent({tab}){
+
+    const [fade, setFade] = useState('');
+
+    useEffect(()=>{
+      const fadeTimer = setTimeout(() => {
+        setFade('end')
+      }, 100);
+      return ()=>{
+        clearTimeout(fadeTimer)
+        setFade('')
+      }
+    }, [tab])
+
     // if문 안쓰려면 
-    // return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]
-    
+    return (
+      <div className={`start ${fade}`}>
+        {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]}
+      </div>
+    )
     // if문 
-    if( tab === 0) {
-      return <div>내용0</div>
-    } else if( tab === 1){
-      return <div>내용1</div>
-    } else if( tab === 2){
-      return  <div>내용2</div>
-    }
+    // if( tab === 0) {
+    //   return <div>내용0</div>
+    // } else if( tab === 1){
+    //   return <div>내용1</div>
+    // } else if( tab === 2){
+    //   return  <div>내용2</div>
+    // }
 }
 
 
