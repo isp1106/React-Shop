@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import { Button, Navbar, Container, Nav } from "react-bootstrap";
 import "./App.css";
 import bg from "./img/bg.png";
@@ -7,9 +6,9 @@ import { createContext, useState } from "react";
 import Card from "./components/Card";
 import Event from "./routes/Event";
 import Detail from "./routes/Detail";
+import Cart from "./routes/Cart";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import axios from 'axios';
-
 export const Context1 = createContext()
 
 function App() {
@@ -26,6 +25,7 @@ function App() {
             <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/detail/0')}}>Detail</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/event')}}>Event</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/cart')}}>Cart</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -38,7 +38,7 @@ function App() {
               <div className='container'>
                 <div className='row'>
                   {shoes.map((a, i) => {
-                    return <Card shoes={shoes[i]} i={i}></Card>;
+                    return <Card shoes={shoes[i]} i={i} key="i"></Card>;
                   })}
                 </div>
               </div>
@@ -66,7 +66,9 @@ function App() {
           <Route path="" element={<>첫 주문시 양배추즙 서비스</>}></Route>
           <Route path="two" element={<>생일기념 쿠폰받기</>}></Route>
         </Route>
-      </Routes>    
+
+        <Route path="/cart" element={ <Cart /> } />
+      </Routes>
     </div>
   );
 }
