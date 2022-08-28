@@ -1,17 +1,5 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
-
-const user = createSlice({
-  name : 'user',
-  initialState : {name : 'kim', age : 20},
-  reducers : {
-    ChangeName(state){
-      state.name = 'park'
-    },
-    IncreaseAge(state, action){
-      state.age += action.payload
-    }
-  }
-})
+import user from './store/userSlice'
 
 const stock = createSlice({
   name : 'stock',
@@ -34,5 +22,4 @@ export default configureStore({
     stock : stock.reducer,
     cart : cart.reducer
   }
-}) 
-export const { ChangeName, IncreaseAge } = user.actions
+})
