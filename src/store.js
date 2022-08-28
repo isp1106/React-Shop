@@ -13,8 +13,14 @@ const cart = createSlice({
     {id : 2, name : 'Grey Yordan', count : 1}
   ],
   reducers : {
+    IncreaseCounter(state, action){
+      const findNum = state.findIndex((array)=> array.id === action.payload )
+      state[findNum].count++
+    }
   }
 })
+
+export const {IncreaseCounter} = cart.actions
 
 export default configureStore({
   reducer: {
