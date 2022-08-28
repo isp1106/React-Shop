@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react'
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect, useContext} from 'react';
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components';
-import {Nav} from 'react-bootstrap'
-import {Context1} from './../App'
-import { useContext } from 'react';
+import { Nav } from 'react-bootstrap'
+import { Context1 } from './../App'
+import { addItem } from './../store'
+import { useDispatch } from 'react-redux'
 // const YellowBtn = styled.button`
 //   background: ${props => props.bg};
 //   color: black;
@@ -19,6 +19,7 @@ function Detail(props) {
   const [alert, setAlert] = useState(true)
   const [tab, setTab] = useState(0)
   const [open, setOpen] = useState('')
+  const dispatch = useDispatch()
   useEffect(()=>{
 
     const timerDetail = setTimeout(()=> {
@@ -54,7 +55,9 @@ function Detail(props) {
           <h4 className="pt-5">{findProduct.title}</h4>
           <p>{findProduct.content}</p>
           <p>{findProduct.price}</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button className="btn btn-danger" onClick={()=>{
+            dispatch(addItem({id : 1, name : 'Red Knit', count : 1}))
+          }}>주문하기</button>
         </div>
       </div>
       <Nav variant="tabs"  defaultActiveKey="link0">
